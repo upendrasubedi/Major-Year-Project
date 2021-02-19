@@ -2,7 +2,7 @@
 import numpy as np 
 import glob
 import matplotlib.pyplot as plt 
-
+dfsddsfds
 #created
 from data.processing import *
 from data.emgprocessings import *
