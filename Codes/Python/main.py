@@ -2,7 +2,7 @@
 import numpy as np 
 import glob
 import matplotlib.pyplot as plt 
-dfsddsfds
+#dfsddsfds
 #created
 from data.processing import *
 from data.emgprocessings import *
@@ -221,13 +221,18 @@ def CNN_Classifier(X_train, Y_train, X_test, Y_test):
 	# max_val_acc = max(history.history['accuracy'])
 	# print(max_val_acc) #['loss', 'acc']
 
-	print(list(history.history.keys()))
-	plt.plot(history.history['acc'])
-	plt.plot(history.history['val_acc'])
-	# plt.plot(history.history['loss'])
+	# print(list(history.history.keys()))
+    
+	#plt.plot(history.history['val_acc'])
+	#plt.plot(history.history['loss'])
+	
 	plt.title('model acc')
+	plt.plot(history.history['accuracy'])
 	plt.ylabel('accuracy')
 	plt.xlabel('epoch')
+	plt.show()
+	plt.plot(history.history['loss'])
+	plt.title('loss')
 	plt.show()
 
 	return CNN_model.evaluate(X_test, Y_test)[1]
