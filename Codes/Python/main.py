@@ -39,8 +39,8 @@ checkresults = check_pickle(root+'dataset/[R|S|U]*/')
 # if checkresults != []:
 	# extractSegInPickle(root+'dataset/*/*/', channels = range(0, 8), surrounding=210)
 
-#use  unix glob patterns to import the pickle data and label
-data, label = loadSegOfPickle(root+'dataset/SR/mo*/')
+#use  unix glob patterns to import the pickle data and 
+data, label = loadSegOfPickle(root+'dataset/US/mo*/')
 
 '''
 #data[data_number][sample_number, Channel_number]
@@ -55,7 +55,8 @@ sample_number - number of samples recorded <rows> (variable in length due to dif
 Channel_number - number of channels i.e. 8 <column>
 '''
 
-
+#print(len(data))
+#print(len(label))
 #plot for the data distribution.
 labs = list(set(label))
 counts = [ label.count(i) for i in labs ]
@@ -64,11 +65,12 @@ y_pos = np.arange(len(labs))#np.arange(0,max(counts), 5)
 
 print(labs)
 print(counts)
+print(x_pos)
 
-plt.bar(y_pos, counts, align = 'center', alpha = 0.5)
-plt.xticks(x_pos, labs)
+plt.bar(x_pos, counts, align = 'center', alpha = 0.5)
+plt.xticks(x_pos, labs) # x_pos(0,1,2...,9) maa labs(call,you..) mark garne
 plt.ylabel('counts')
-plt.title('SR data distribution')
+plt.title('US data distribution')
 plt.show()
 # end of distribution plot
 
@@ -243,7 +245,7 @@ https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.iirnotch.html
 https://www.codegrepper.com/code-examples/python/moving+average+filter+in+python
 
 '''
-
+'''
 https://machinelearningmastery.com/save-load-machine-learning-models-python-scikit-learn/
 https://www.tensorflow.org/guide/keras/save_and_serialize
 '''
