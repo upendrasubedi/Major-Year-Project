@@ -3,10 +3,13 @@
 import tensorflow as tf 
 import numpy as np
 from tensorflow import keras
-from data.processing import check_file, extractSeg_from_file
-from data.emgprocessings import filter_data
+from data.processing import *
+from data.emgprocessings import *
 
+import os 
+import sys
 
+CURR_DIR = os.getcwd()
 MAIN_DIR = os.path.join(CURR_DIR,"..","..")
 DATA_DIR = os.path.join(MAIN_DIR,"dataset")
 FILE_DIR = os.path.join(MAIN_DIR,"dataset","pickle")
@@ -34,7 +37,7 @@ def get_recording_file():
 	return checkresults
 
 #call the model 
-model = keras.models.load_model('model')
+model = keras.models.load_model(os.path.join(MODELS, cnn_mouth_model))
 
 #checking for the file from openbci.
 rec_file= get_recording_file()
@@ -74,11 +77,28 @@ for i in range(len(instance_data)):
 	temp.append(get_emg_features(instance_data[i]))
 data_feat = np.array(temp)
 
-X= data_feat 	#just for naming
+
+label = ['you', 'you', 	'go', 'reply', 'call', 'go', 'left', 'stop', 'call', 'subtract',
+		 'add', 'reply', 'later', 'subtract', 'left', 'stop', 'add', 'right', 'later', 'right']
+# to save the data and label as dictionary in pickle file.
+def save_as_dict(data, label, file_name):
+	di = { 'data' : data, 'label' : label}
+	print(di.keys)
+	pickle.dump(di , open(file_name+'.pickle', 'wb'))
+	print("[+] write complete.")
+save_as_dict(data_feat, label, 'us_test_term_me')
+
+'''
+print(data_feat.shape)
+
+X = data_feat 	#just for naming
+
+
 
 #scaling data
-from sklearn.preprocesing import StandardScaler
+from sklearn.preprocessing import StandardScaler
 scalar = StandardScaler()
+Y = [] 
 X = (scalar.fit_transform(X.reshape(X.shape[0], -1), Y)).reshape(X.shape[0], X.shape[1], -1)
 
 dataset_labels = ['add', 'call', 'go', 'later', 'left',

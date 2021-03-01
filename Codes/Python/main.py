@@ -117,10 +117,10 @@ for i in range(len(instance_data)):
 instance_data = np.array(temp)
 
 # Feature extraction
-# temp = []
-# for i in range(len(data)):
-# 	temp.append(get_emg_features(data[i]))
-# data_feat = np.array(temp)
+temp = []
+for i in range(len(data)):
+	temp.append(get_emg_features(data[i]))
+data_feat = np.array(temp)
 
 #reshaping the data_feat to make compatible with conv2d
 # a = data_feat
@@ -137,7 +137,7 @@ def save_as_dict(data, label, file_name):
 	print(di.keys)
 	pickle.dump(di , open(file_name+'.pickle', 'wb'))
 	print("[+] write complete.")
-# save_as_dict(data_feat, label, 'ALL_feature_spectral_mo')
+save_as_dict(data_feat, label, 'ALL_feature_spectral_mo')
 
 X = instance_data	#making easy to manage and change  variable.
 Y = label 		
